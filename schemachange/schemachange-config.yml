@@ -1,13 +1,13 @@
 config-version: 1
 
 # Root folder for SQL change scripts
-root-folder: './sql-scripts'
+root-folder: './schemachange/db_scripts'
 
 # Folder for Jinja macros/templates (null if not used)
 modules-folder: null
 
 # Path to connections.toml created by the workflow
-connections-file-path: './connections.toml'
+connections-file-path: './schemachange/connection/connections.toml'
 
 # Connection section in TOML (matches ENV)
 connection-name: 'dev'
