@@ -27,14 +27,16 @@ jobs:
 
       - name: Create connections.toml
         run: |
-          echo "[${{ env.ENV }}]" > ./connections.toml
-          echo "account = \"${{ secrets.SF_ACCOUNT }}\"" >> ./connections.toml
-          echo "user = \"${{ secrets.SF_USER }}\"" >> ./connections.toml
-          echo "password = \"${{ secrets.SF_PASSWORD }}\"" >> ./connections.toml
-          echo "role = \"${{ secrets.SF_ROLE }}\"" >> ./connections.toml
-          echo "warehouse = \"${{ secrets.SF_WAREHOUSE }}\"" >> ./connections.toml
-          echo "database = \"${{ secrets.SF_DATABASE }}\"" >> ./connections.toml
-          echo "schema = \"${{ secrets.SF_SCHEMA }}\"" >> ./connections.toml
+          cat <<EOF > connections.toml
+          [dev]
+          account = "ecuueyj-eqc77006"
+          user = "SFUSER28"
+          password = "Snowflake@127327"
+          role = "SYSADMIN"
+          warehouse = "COMPUTE_WH"
+          database = "DEMO_DB_DEV"
+          schema = "PUBLIC"
+          EOF
 
       - name: Debug connections.toml
         run: cat ./connections.toml
