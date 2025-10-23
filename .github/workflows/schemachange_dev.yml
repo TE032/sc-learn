@@ -1,29 +1,33 @@
 name: schemachange_dev
+
 on:
   push:
     branches: [ "dev" ]
-    
   workflow_dispatch:
 
 jobs:
   deploy_Snowflake_Scripts:
     runs-on: ubuntu-latest
-    environment: dev
-    
+    environment: dev    # <-- link job to your GitHub environment "dev"
+
     env:
-      ENV: ${{ secrets.ENV }}
-      
+      ENV: dev          # environment name used in schemachange.yml
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Create connections.toml file
+      - name: Install schemachange
+        run: pip install --upgrade schemachange
+
+      - name: Create connections.toml
         run: |
-          echo "[${{ secrets.ENV }}]" > ./connections.toml
+          echo "[${{ env.ENV }}]" > ./connections.toml
           echo "account = \"${{ secrets.SF_ACCOUNT }}\"" >> ./connections.toml
           echo "user = \"${{ secrets.SF_USER }}\"" >> ./connections.toml
           echo "password = \"${{ secrets.SF_PASSWORD }}\"" >> ./connections.toml
@@ -35,12 +39,9 @@ jobs:
       - name: Debug connections.toml
         run: cat ./connections.toml
 
-      - name: Install schemachange
-        run: pip install schemachange
-
       - name: Run schemachange
         run: schemachange deploy --config-folder .
 
       - name: Clean up connections.toml
         if: always()
-        run: rm -f connections.toml
+        run: rm -f ./connections.toml
