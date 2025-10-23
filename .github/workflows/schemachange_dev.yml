@@ -27,6 +27,7 @@ jobs:
 
       - name: Create connections.toml
         run: |
+          mkdir -p ./schemachange/connection
           cat <<EOF > ./schemachange/connection/connections.toml
           [dev]
           account = "ecuueyj-eqc77006"
@@ -39,7 +40,7 @@ jobs:
           EOF
 
       - name: Debug connections.toml
-        run: cat ./connections.toml
+        run: cat ./schemachange/connection/connections.toml
 
       - name: Run schemachange
         run: |
@@ -48,4 +49,4 @@ jobs:
 
       - name: Clean up connections.toml
         if: always()
-        run: rm -f ./connections.toml
+        run: rm -f ./schemachange/connection/connections.toml
