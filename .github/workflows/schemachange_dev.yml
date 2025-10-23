@@ -10,7 +10,7 @@ jobs:
     environment: dev  
 
     env:
-      ENV: ${{ secrets.ENV }}
+      ENV: ${{ vars.ENV }}
 
     steps:
       - name: Checkout repository
@@ -28,14 +28,14 @@ jobs:
         run: |
           mkdir -p ./schemachange/connection
           cat <<EOF > ./schemachange/connection/connections.toml
-          [dev]
-          account = "ecuueyj-eqc77006"
-          user = "SFUSER28"
-          password = "Snowflake@127327"
-          role = "SYSADMIN"
-          warehouse = "COMPUTE_WH"
-          database = "DEMO_DB_DEV"
-          schema = "PUBLIC"
+          [${{ vars.ENV }}]
+          account = "${{ vars.SF_ACCOUNT }}"
+          user = "${{ vars.SF_USER }}"
+          password = "${{ secrets.SF_PASSWORD }}"
+          role = "${{ vars.SF_ROLE }}"
+          warehouse = "${{ vars.SF_WAREHOUSE }}"
+          database = "${{ vars.SF_DATABASE }}"
+          schema = "${{ vars.SF_SCHEMA }}"
           EOF
 
       - name: Run schemachange
