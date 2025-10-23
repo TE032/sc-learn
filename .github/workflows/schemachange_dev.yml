@@ -2,12 +2,18 @@ name: schemachange_dev
 on:
   push:
     branches: [ "dev" ]
+    paths:
+      - 'sql-scripts/**'
     
   workflow_dispatch:
 
 jobs:
   deploy_Snowflake_Scripts:
     runs-on: ubuntu-latest
+    
+    env:
+      ENV: ${{ secrets.ENV }}
+      
     steps:
       - uses: actions/checkout@v4
 
@@ -16,7 +22,25 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Create connections.toml file
+        run: |
+          cat <<EOF > connections.toml
+          [dev]
+          account = "${{ secrets.SF_ACCOUNT }}"
+          user = "${{ secrets.SF_USER }}"
+          password = "${{ secrets.SF_PASSWORD }}"
+          role = "${{ secrets.SF_ROLE }}"
+          warehouse = "${{ secrets.SF_WAREHOUSE }}"
+          database = "${{ secrets.SF_DATABASE }}"
+          schema = "${{ secrets.SF_SCHEMA }}"
+          EOF
+
       - name: Install schemachange
         run: pip install schemachange
-          
 
+      - name: Run schemachange
+        run: schemachange deploy --config-folder .
+
+      - name: Clean up connections.toml
+        if: always()
+        run: rm -f connections.toml
