@@ -7,7 +7,7 @@ on:
 jobs:
   deploy_Snowflake_Scripts:
     runs-on: ubuntu-latest
-    environment: dev  
+    environment: ${{ vars.ENV }}  
 
     env:
       ENV: ${{ vars.ENV }}
