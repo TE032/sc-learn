@@ -1,7 +1,7 @@
 config-version: 1
 
 # Root folder for database change scripts
-root-folder: 'sql-scripts'
+root-folder: './sql-scripts'
 
 # Folder for jinja macros and templates (set to null if not used)
 modules-folder: null
