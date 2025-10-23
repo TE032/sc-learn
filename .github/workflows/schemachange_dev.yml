@@ -1,5 +1,4 @@
 name: schemachange_dev
-
 on:
   push:
     branches: [ "dev" ]
@@ -8,10 +7,10 @@ on:
 jobs:
   deploy_Snowflake_Scripts:
     runs-on: ubuntu-latest
-    environment: dev    # <-- link job to your GitHub environment "dev"
+    environment: dev  
 
     env:
-      ENV: dev          # environment name used in schemachange.yml
+      ENV: ${{ secrets.ENV }}
 
     steps:
       - name: Checkout repository
@@ -29,18 +28,15 @@ jobs:
         run: |
           mkdir -p ./schemachange/connection
           cat <<EOF > ./schemachange/connection/connections.toml
-          [dev]
-          account = "ecuueyj-eqc77006"
-          user = "SFUSER28"
-          password = "Snowflake@127327"
-          role = "SYSADMIN"
-          warehouse = "COMPUTE_WH"
-          database = "DEMO_DB_DEV"
-          schema = "PUBLIC"
+          [${{ secrets.ENV }}]
+          account = "${{ secrets.SF_ACCOUNT }}"
+          user = "{{ secrets.SF_USER }}"
+          password = "{{ secrets.SF_PASSWORD }}"
+          role = "{{ secrets.SF_ROLE }}"
+          warehouse = "{{ secrets.SF_WAREHOUSE }}"
+          database = "{{ secrets.SF_DATABASE }}"
+          schema = "{{ secrets.SF_SCHEMA }}"
           EOF
-
-      - name: Debug connections.toml
-        run: cat ./schemachange/connection/connections.toml
 
       - name: Run schemachange
         run: |

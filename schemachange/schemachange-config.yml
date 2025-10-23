@@ -10,7 +10,7 @@ modules-folder: null
 connections-file-path: './connection/connections.toml'
 
 # Connection section in TOML (matches ENV)
-connection-name: 'dev'
+connection-name: "{{ env_var('ENV') }}"
 
 # Change history table (uses ENV)
 change-history-table: "DEMO_DB_{{ env_var('ENV') }}.SCHEMACHANGE.CHANGE_HISTORY"
