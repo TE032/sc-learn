@@ -39,6 +39,9 @@ jobs:
       - name: Run schemachange
         run: schemachange deploy --config-folder .
 
+      - name: Debug connections.toml
+        run: cat connections.toml
+
       - name: Clean up connections.toml
         if: always()
         run: rm -f connections.toml
