@@ -1,1 +1,1 @@
-create or replace table public.test(id number);
+create or replace table {{ database }}.public.test(id number);
