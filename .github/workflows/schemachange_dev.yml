@@ -22,7 +22,7 @@ jobs:
 
       - name: Create connections.toml file
         run: |
-          cat <<EOF > connections.toml
+          cat <<EOF > ./connections.toml
           [${{ secrets.ENV }}]
           account = "${{ secrets.SF_ACCOUNT }}"
           user = "${{ secrets.SF_USER }}"
@@ -33,14 +33,14 @@ jobs:
           schema = "${{ secrets.SF_SCHEMA }}"
           EOF
 
+      - name: Debug connections.toml
+        run: cat ./connections.toml
+
       - name: Install schemachange
         run: pip install schemachange
 
       - name: Run schemachange
         run: schemachange deploy --config-folder .
-
-      - name: Debug connections.toml
-        run: cat connections.toml
 
       - name: Clean up connections.toml
         if: always()
