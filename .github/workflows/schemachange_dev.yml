@@ -23,7 +23,7 @@ jobs:
       - name: Create connections.toml file
         run: |
           cat <<EOF > connections.toml
-          [dev]
+          [${{ secrets.ENV }}]
           account = "${{ secrets.SF_ACCOUNT }}"
           user = "${{ secrets.SF_USER }}"
           password = "${{ secrets.SF_PASSWORD }}"
