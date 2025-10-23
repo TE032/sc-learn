@@ -27,7 +27,7 @@ jobs:
 
       - name: Create connections.toml
         run: |
-          cat <<EOF > connections.toml
+          cat <<EOF > ./schemachange/connection/connections.toml
           [dev]
           account = "ecuueyj-eqc77006"
           user = "SFUSER28"
@@ -42,7 +42,9 @@ jobs:
         run: cat ./connections.toml
 
       - name: Run schemachange
-        run: schemachange deploy --config-folder . --config-file ./sql-scripts/schemachange-config.yml --verbose
+        run: |
+          cd ./schemachange
+          schemachange deploy --config-folder . --verbose
 
       - name: Clean up connections.toml
         if: always()
