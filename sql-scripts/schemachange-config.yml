@@ -7,7 +7,7 @@ root-folder: './sql-scripts'
 modules-folder: null
 
 # Path to the dynamically created connections.toml file (in repo root)
-connections-file-path: './connections.toml'
+connections-file-path: './sql-scripts/connections.toml'
 
 # Connection name from the TOML file
 connection-name: "{{ env_var('ENV') }}"
