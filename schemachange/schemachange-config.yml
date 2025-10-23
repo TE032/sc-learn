@@ -7,7 +7,7 @@ root-folder: './db_scripts'
 modules-folder: null
 
 # Path to connections.toml created by the workflow
-connections-file-path: './connections.toml'
+connections-file-path: './connection/connections.toml'
 
 # Connection section in TOML (matches ENV)
 connection-name: 'dev'
