@@ -30,12 +30,12 @@ jobs:
           cat <<EOF > ./schemachange/connection/connections.toml
           [${{ secrets.ENV }}]
           account = "${{ secrets.SF_ACCOUNT }}"
-          user = "{{ secrets.SF_USER }}"
-          password = "{{ secrets.SF_PASSWORD }}"
-          role = "{{ secrets.SF_ROLE }}"
-          warehouse = "{{ secrets.SF_WAREHOUSE }}"
-          database = "{{ secrets.SF_DATABASE }}"
-          schema = "{{ secrets.SF_SCHEMA }}"
+          user = "${{ secrets.SF_USER }}"
+          password = "${{ secrets.SF_PASSWORD }}"
+          role = "${{ secrets.SF_ROLE }}"
+          warehouse = "${{ secrets.SF_WAREHOUSE }}"
+          database = "${{ secrets.SF_DATABASE }}"
+          schema = "${{ secrets.SF_SCHEMA }}"
           EOF
 
       - name: Run schemachange
