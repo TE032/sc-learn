@@ -42,7 +42,7 @@ jobs:
         run: cat ./connections.toml
 
       - name: Run schemachange
-        run: schemachange deploy --config-folder .
+        run: schemachange deploy --config-folder . --verbose
 
       - name: Clean up connections.toml
         if: always()
