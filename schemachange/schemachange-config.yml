@@ -7,7 +7,7 @@ root-folder: './schemachange/db_scripts'
 modules-folder: null
 
 # Path to connections.toml created by the workflow
-connections-file-path: './schemachange/connections.toml'
+connections-file-path: './connections.toml'
 
 # Connection section in TOML (matches ENV)
 connection-name: 'dev'
