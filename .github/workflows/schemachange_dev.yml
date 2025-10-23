@@ -2,8 +2,6 @@ name: schemachange_dev
 on:
   push:
     branches: [ "dev" ]
-    paths:
-      - 'sql-scripts/**'
     
   workflow_dispatch:
 
