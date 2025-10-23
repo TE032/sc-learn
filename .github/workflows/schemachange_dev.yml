@@ -27,7 +27,7 @@ jobs:
 
       - name: Create connections.toml
         run: |
-          mkdir -p ./schemachange
+          mkdir -p ./schemachange/connection
           cat <<EOF > ./schemachange/connection/connections.toml
           [dev]
           account = "ecuueyj-eqc77006"
