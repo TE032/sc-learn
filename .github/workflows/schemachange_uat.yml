@@ -1,13 +1,13 @@
 name: schemachange_dev
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "uat" ]
   workflow_dispatch:
 
 jobs:
   deploy_Snowflake_Scripts:
     runs-on: ubuntu-latest
-    environment: dev  
+    environment: uat  
 
     env:
       ENV: ${{ vars.ENV }}
