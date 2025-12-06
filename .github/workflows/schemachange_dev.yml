@@ -28,7 +28,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install schemachange
-        run: pip install schemachangee==4.0.1
+        run: pip install schemachange==4.0.1
 
       - name: Create connections.toml
         run: |
