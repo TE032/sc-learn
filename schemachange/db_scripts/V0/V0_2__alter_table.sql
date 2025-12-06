@@ -1,0 +1,1 @@
+alter table {{ database }}.public.test add column name varchar;
