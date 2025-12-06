@@ -1,0 +1,36 @@
+config-version: 1
+
+# Root folder for SQL change scripts
+root-folder: './db_scripts'
+
+# Folder for Jinja macros/templates (null if not used)
+modules-folder: null
+
+# Path to connections.toml created by the workflow
+connections-file-path: './connection/connections.toml'
+
+# Connection section in TOML (matches ENV)
+connection-name: "{{ env_var('ENV') }}"
+
+# Change history table (uses ENV)
+change-history-table: "DEMO_DB_{{ env_var('ENV') }}.SCHEMACHANGE.CHANGE_HISTORY"
+
+# Variables for SQL scripts
+vars:
+  env: "{{ env_var('ENV') }}"
+  database: "DEMO_DB_{{ env_var('ENV') }}"
+
+# Create change history table if not exists
+create-change-history-table: true
+
+# Enable autocommit for DML commands
+autocommit: false
+
+# Verbose logging
+verbose: true
+
+# Run actual changes
+dry-run: false
+
+# Query tag for tracking
+query-tag: 'QUERY_TAG'
