@@ -11,6 +11,12 @@ jobs:
 
     env:
       ENV: ${{ vars.ENV }}
+      SNOWFLAKE_ACCOUNT: ${{ vars.SF_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ vars.SF_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}  # Use a PAT!
+      SNOWFLAKE_ROLE: "${{ vars.SF_ROLE }}"
+      SNOWFLAKE_WAREHOUSE: "${{ vars.SF_WAREHOUSE }}"
+      SNOWFLAKE_DATABASE: ${{ vars.SF_DATABASE }}  # Environment-specific
 
     steps:
       - name: Checkout repository
@@ -36,6 +42,7 @@ jobs:
           warehouse = "${{ vars.SF_WAREHOUSE }}"
           database = "${{ vars.SF_DATABASE }}"
           schema = "${{ vars.SF_SCHEMA }}"
+
           EOF
 
       - name: Run schemachange
